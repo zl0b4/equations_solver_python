@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>1084</width>
+    <height>724</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -85,7 +85,7 @@
    <widget class="QLabel" name="xEqualsView">
     <property name="geometry">
      <rect>
-      <x>580</x>
+      <x>840</x>
       <y>140</y>
       <width>41</width>
       <height>51</height>
@@ -115,7 +115,7 @@
      <rect>
       <x>390</x>
       <y>80</y>
-      <width>101</width>
+      <width>81</width>
       <height>192</height>
      </rect>
     </property>
@@ -123,7 +123,7 @@
    <widget class="QTableWidget" name="solveTable">
     <property name="geometry">
      <rect>
-      <x>630</x>
+      <x>890</x>
       <y>80</y>
       <width>121</width>
       <height>192</height>
@@ -133,7 +133,7 @@
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>590</x>
+      <x>890</x>
       <y>60</y>
       <width>181</width>
       <height>16</height>
@@ -146,8 +146,8 @@
    <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
-      <x>620</x>
-      <y>290</y>
+      <x>890</x>
+      <y>280</y>
       <width>141</width>
       <height>16</height>
      </rect>
@@ -159,8 +159,8 @@
    <widget class="QLabel" name="xEqualsView_2">
     <property name="geometry">
      <rect>
-      <x>570</x>
-      <y>370</y>
+      <x>830</x>
+      <y>360</y>
       <width>41</width>
       <height>51</height>
      </rect>
@@ -177,8 +177,8 @@
    <widget class="QTableWidget" name="solveTableKramer">
     <property name="geometry">
      <rect>
-      <x>620</x>
-      <y>310</y>
+      <x>890</x>
+      <y>300</y>
       <width>121</width>
       <height>192</height>
      </rect>
@@ -202,6 +202,65 @@
      <string>Определитель основной матрицы системы:</string>
     </property>
    </widget>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>570</x>
+      <y>60</y>
+      <width>361</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Обратная матрица</string>
+    </property>
+   </widget>
+   <widget class="QTableWidget" name="inversMatrixTable">
+    <property name="geometry">
+     <rect>
+      <x>570</x>
+      <y>80</y>
+      <width>241</width>
+      <height>191</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QTableWidget" name="detsTable">
+    <property name="geometry">
+     <rect>
+      <x>570</x>
+      <y>300</y>
+      <width>241</width>
+      <height>191</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_7">
+    <property name="geometry">
+     <rect>
+      <x>570</x>
+      <y>280</y>
+      <width>361</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Определители</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="multInv">
+    <property name="geometry">
+     <rect>
+      <x>490</x>
+      <y>150</y>
+      <width>60</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QMenuBar" name="menubar">
@@ -209,7 +268,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>1084</width>
      <height>37</height>
     </rect>
    </property>

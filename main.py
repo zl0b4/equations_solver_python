@@ -8,6 +8,7 @@ import os
 from matrix_method import solve_matrix_method
 from kramer_method import solve_Kramer
 from det_matrix import determinant
+from inverse_matrix import inverse_matrix
 
 
 class MainWindow(QMainWindow):
@@ -27,17 +28,13 @@ class MainWindow(QMainWindow):
 
 
     def change_visibility(self, visibility):
-        self.label_2.setVisible(visibility)
-        self.label_4.setVisible(visibility)
-        self.variablesTable.setVisible(visibility)
-        self.label_3.setVisible(visibility)
-        self.freeOddsTable.setVisible(visibility)
-        self.solveButton.setVisible(visibility)
-        self.xEqualsView.setVisible(visibility)
-        self.solveTable.setVisible(visibility)
-        self.xEqualsView_2.setVisible(visibility)
-        self.solveTableKramer.setVisible(visibility)
-        self.label_5.setVisible(visibility)
+        for obj in [self.label_2, self.label_4, self.variablesTable,
+                    self.label_3, self.freeOddsTable, self.solveButton,
+                    self.xEqualsView, self.solveTable, self.xEqualsView_2,
+                    self.solveTableKramer, self.label_5, self.label_6,
+                    self.inversMatrixTable, self.label_7, self.detsTable,
+                    self.multInv]:
+            obj.setVisible(visibility)
         
 
     def resize_variables(self):
@@ -75,20 +72,28 @@ class MainWindow(QMainWindow):
         table.setColumnCount(1)
         table.setRowCount(n)
         table.resizeColumnsToContents()
-        table.setVerticalHeaderLabels([f'b{i}' for i in range(n)])
+        table.setVerticalHeaderLabels([f'b{i+1}' for i in range(n)])
         table.setHorizontalHeaderLabels([''])
 
-    def create_solve_table(self, table, eq_solve):
+    def create_solve_table(self, table, eq_solve, m=1):
         n = self.n
         #print(eq_solve)
-        table.setColumnCount(1)
+        table.setColumnCount(m)
         table.setRowCount(n)
         table.resizeColumnsToContents()
-        table.setVerticalHeaderLabels([f'x{i}' for i in range(n)])
-        table.setHorizontalHeaderLabels([''])
+        
         #print(eq_solve)
-        for i in range(n):
-            table.setItem(i, 0, QTableWidgetItem(str(eq_solve[i])))
+        if type(eq_solve[0]) is not list:
+            table.setVerticalHeaderLabels([f'x{i+1}' for i in range(n)])
+            table.setHorizontalHeaderLabels([''])
+            for i in range(n):
+                table.setItem(i, 0, QTableWidgetItem(str(eq_solve[i])))
+        else:
+            table.setVerticalHeaderLabels(['' for _ in range(n)])
+            table.setHorizontalHeaderLabels(['' for _ in range(m)])
+            for i in range(n):
+                for j in range(m):
+                    table.setItem(i, j, QTableWidgetItem(str(eq_solve[i][j])))
         table.resizeColumnsToContents()
 
        
@@ -116,20 +121,27 @@ class MainWindow(QMainWindow):
             error_dialog.showMessage('Заполните все ячейки числами!')
             return
         try:
-            det = determinant(matrix)
+            det, inv = inverse_matrix(matrix)  
             self.detLabel.setText(f"Определитель основной матрицы системы:\n{det}")
             self.detLabel.setVisible(True)
             
             eq_solve = solve_matrix_method(matrix, free_odds)
-            eq_solve_Kramer = solve_Kramer(matrix, free_odds)
+                      
+
+            self.multInv.setText(f"1/{det}*")
+            self.create_solve_table(self.inversMatrixTable, inv, n)
+            
+            Kramer_dets, eq_solve_Kramer = solve_Kramer(matrix, free_odds)
             self.create_solve_table(self.solveTable, eq_solve)
             self.create_solve_table(self.solveTableKramer, eq_solve_Kramer)
+            self.create_solve_table(self.detsTable, Kramer_dets)
+            self.detsTable.setVerticalHeaderLabels([f'Δ{i+1}' for i in range(n)])
         except ValueError:
             error_dialog = QErrorMessage(self)
-            error_dialog.showMessage('Основная матрица системы вырожденная, решений нет!')
+            error_dialog.showMessage('Основная матрица системы вырожденная, единственного решения нет!')
 
 
-   
+
     def inst(self):  # Инструкция
         text = r'''Открытие таблицы или запроса.
 Для того чтобы открыть нужную Вам таблицу, кликнитена кнопку "Кабинеты"/"Опись".

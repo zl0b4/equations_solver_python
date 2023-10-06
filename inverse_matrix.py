@@ -9,7 +9,6 @@ def inverse_matrix(matrix):
     inv = [[0] * n for _ in range(n)]
 
     det = determinant(matrix)
-    print(f"det={det}")
 
     if det:
         for i in range(n):
